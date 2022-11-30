@@ -1,0 +1,80 @@
+*{
+    
+    /*border: 2px solid red;*/
+}
+
+.container { 
+background-color: black;
+border: 2px solid white;
+border-width: 20px 10px 35px 10px;
+border-radius: 100px;
+height: 1650px;
+width: 750px; 
+margin: auto; 
+background-image: linear-gradient(90deg, #020024 25%, #404041 75%, #a9abab 100%);
+}
+
+.header {
+    display: flex; 
+    text-align: center;
+    margin: 40px 20px ;
+    height: 150px; 
+}
+
+.second-line {
+    margin-top: 35px; 
+}
+
+.logo {
+    color: white;
+    width: 300px;
+    margin-left: 20px; 
+    flex: 1 0 auto; 
+}
+
+.company {
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+
+.model {
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.nickname{
+    font-weight: bold;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: rgb(179, 68, 87);  
+    font-size: 30px; 
+}
+
+.solar {
+    background-color: grey;
+    width: 350px;
+    height: 150px;
+    border-radius: 25px;
+    border-left: 20px solid rgb(65, 62, 62);
+    border-bottom: 20px solid rgb(65, 62, 62);
+    border-right: 20px solid black;
+    border-top: 20px solid black;
+    flex: 1 0 auto; 
+}
+
+.grid-container {
+    display: grid;
+}
+
+.screen {
+    background-color: rgb(86, 117, 86);
+    width: 640px;
+    height: 250px;
+    border-radius: 25px;
+    border-left: 20px solid rgb(65, 62, 62);
+    border-bottom: 20px solid rgb(65, 62, 62);
+    border-right: 20px solid black;
+    border-top: 20px solid black;
+    margin: 50px 0 0 50px;
+}
