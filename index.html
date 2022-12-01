@@ -7,20 +7,57 @@
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
-<body>
-
-    <!--Now the idea is, do I load assets in through the DOM or do I build them into the 
-    HTML?--> <!--Let's Try direct HTML-->
-
-    <div class="container">
+<body>    
+    <div class="calculator">
         <div class="header">
-            <div class="logo"> <div class = "company"> CASIO </div> <div class="second-line"><div class = "model">fx-991EX</div> 
-            <div class = "nickname">CLASSWIZ</div></div></div>
-            <div class="solar-container"></div><div class="solar"></div>
+            <div class="logo"> <div class = "company"> TESSIO </div> <div class="second-line"><div class = "model">sf-961FS</div> 
+            <div class = "nickname">C L A S S W I Z</div></div></div>
+            <div class="solar-box"></div><div class="solar"></div>
         </div>
         <div class="screen"></div>
+
+        <div class="grid-container">
+            <button class="grid-item corner-left-top">7</button>
+            <button class="grid-item">8</button>
+            <button class="grid-item">9</button>
+            <button class="grid-item del">DEL</button>
+            <button class="grid-item corner-right-top">AC</button>
+            <button class="grid-item">4</button>
+            <button class="grid-item">5</button>
+            <button class="grid-item">6</button>
+            <button class="grid-item">×</button>
+            <button class="grid-item">÷</button>
+            <button class="grid-item">1</button>
+            <button class="grid-item">2</button>
+            <button class="grid-item">3</button>
+            <button class="grid-item">+</button>
+            <button class="grid-item">-</button>
+            <button class="grid-item corner-left-bottom">0</button>
+            <button class="grid-item">.</button>
+            <button class="grid-item">×10<sup>x</sup></button>
+            <button class="grid-item">Ans</button>
+            <button class="grid-item corner-right-bottom">=</button>
+          </div>
     </div>
     
-    <script></script>
+<script>
+    const keys = document.querySelectorAll('#grid-item'); 
+    var calculator = document.querySelector('#calculator');
+    var screen = document.querySelector('#screen');
+
+    const keysArray = Array.from(keys);
+    console.log(keysArray); 
+
+    function addEventListenerList(list){
+        for (let i = 0; i < list.length; i++){
+            list[i].addEventListener('mouseover', ()=>{ 
+                console.log(list[i].textContent);
+            });
+        };
+    };
+
+    addEventListenerList(keysArray); 
+
+</script>
 </body>
 </html>
