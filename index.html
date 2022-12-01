@@ -26,8 +26,8 @@
             <button class="grid-item 4">4</button>
             <button class="grid-item 5">5</button>
             <button class="grid-item 6">6</button>
-            <button class="grid-item *">×</button>
-            <button class="grid-item /">÷</button>
+            <button class="grid-item *">*</button>
+            <button class="grid-item /">/</button>
             <button class="grid-item 1">1</button>
             <button class="grid-item 2">2</button>
             <button class="grid-item 3">3</button>
@@ -47,8 +47,19 @@
     var calculator = document.querySelector('.calculator');
     var screen = document.querySelector('.screen');
 
-    const keysArray = Array.from(keys);
-    //console.log(keysArray);    
+    const keysArray = Array.from(keys);    
+
+
+    function Calculation(aValue,bValue,operationValue){
+        // This will help us to redeclare the calculation
+        // when 'AC' is pressed on the calculator.
+        this.a = aValue; 
+        this.b = bValue; 
+        this.operation = operationValue; 
+    };
+
+    let calculation = new Calculation(null, null, null); 
+    // don't forget to initialize with a 'new' in front of the Constructor. 
 
     function addEventListenerList(list){
         for (let i = 0; i < list.length; i++){
@@ -57,11 +68,42 @@
                 
                 screen.textContent = list[i].textContent;
                 calculator.insertBefore(screen, grid);
+                
+                
+                // object constructor for calculation later.
+                if (list[i].textContent == '*' || list[i].textContent == '/' || list[i].textContent =='+' || list[i].textContent=='-'){
+                    calculation.operation = list[i].textContent;
+                    console.log(calculation); 
+                
+                } else if (list[i].textContent == 'AC'){
+                    calculation = new Calculation(null, null, null);
+                    screen.textContent = ' '; 
+                    calculator.insertBefore(screen, grid); 
+                    console.log(calculation); 
+
+                } else {
+                    
+                    if (calculation.a == null){
+                        calculation.a = list[i].textContent;
+                        console.log(calculation);
+                    
+                    } else if (calculation.b == null){
+                    
+                        calculation.b = list[i].textContent;
+                        console.log(calculation)
+                    };
+                }; 
+            
+                //if (list[i].textContent = '='){
+                    // evaluate the calculation
+                //};
             });
         };
     };
 
-    addEventListenerList(keysArray); 
+    addEventListenerList(keysArray);
+    
+    // create a function which will evaluate the objects into a calculation.
 
 </script>
 </body>
