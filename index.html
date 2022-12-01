@@ -17,40 +17,40 @@
         <div class="screen"></div>
 
         <div class="grid-container">
-            <button class="grid-item corner-left-top">7</button>
-            <button class="grid-item">8</button>
-            <button class="grid-item">9</button>
+            <button class="grid-item corner-left-top 7">7</button>
+            <button class="grid-item 8">8</button>
+            <button class="grid-item 9">9</button>
             <button class="grid-item del">DEL</button>
-            <button class="grid-item corner-right-top">AC</button>
-            <button class="grid-item">4</button>
-            <button class="grid-item">5</button>
-            <button class="grid-item">6</button>
-            <button class="grid-item">×</button>
-            <button class="grid-item">÷</button>
-            <button class="grid-item">1</button>
-            <button class="grid-item">2</button>
-            <button class="grid-item">3</button>
-            <button class="grid-item">+</button>
-            <button class="grid-item">-</button>
-            <button class="grid-item corner-left-bottom">0</button>
-            <button class="grid-item">.</button>
-            <button class="grid-item">×10<sup>x</sup></button>
-            <button class="grid-item">Ans</button>
-            <button class="grid-item corner-right-bottom">=</button>
+            <button class="grid-item corner-right-top AC">AC</button>
+            <button class="grid-item 4">4</button>
+            <button class="grid-item 5">5</button>
+            <button class="grid-item 6">6</button>
+            <button class="grid-item *">×</button>
+            <button class="grid-item /">÷</button>
+            <button class="grid-item 1">1</button>
+            <button class="grid-item 2">2</button>
+            <button class="grid-item 3">3</button>
+            <button class="grid-item +">+</button>
+            <button class="grid-item -">-</button>
+            <button class="grid-item corner-left-bottom 0">0</button>
+            <button class="grid-item .">.</button>
+            <button class="grid-item"></button>
+            <button class="grid-item"></button>
+            <button class="grid-item corner-right-bottom =">=</button>
           </div>
     </div>
     
 <script>
-    const keys = document.querySelectorAll('#grid-item'); 
-    var calculator = document.querySelector('#calculator');
-    var screen = document.querySelector('#screen');
+    const keys = document.querySelectorAll('.grid-item'); 
+    var calculator = document.querySelector('.calculator');
+    var screen = document.querySelector('.screen');
 
     const keysArray = Array.from(keys);
-    console.log(keysArray); 
+    //console.log(keysArray);    
 
     function addEventListenerList(list){
         for (let i = 0; i < list.length; i++){
-            list[i].addEventListener('mouseover', ()=>{ 
+            list[i].addEventListener('click', ()=>{ 
                 console.log(list[i].textContent);
             });
         };
