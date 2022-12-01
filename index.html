@@ -14,6 +14,7 @@
             <div class = "nickname">C L A S S W I Z</div></div></div>
             <div class="solar-box"></div><div class="solar"></div>
         </div>
+
         <div class="screen"></div>
 
         <div class="grid-container">
@@ -42,6 +43,7 @@
     
 <script>
     const keys = document.querySelectorAll('.grid-item'); 
+    const grid = document.querySelector('.grid-container')
     var calculator = document.querySelector('.calculator');
     var screen = document.querySelector('.screen');
 
@@ -52,6 +54,9 @@
         for (let i = 0; i < list.length; i++){
             list[i].addEventListener('click', ()=>{ 
                 console.log(list[i].textContent);
+                
+                screen.textContent = list[i].textContent;
+                calculator.insertBefore(screen, grid);
             });
         };
     };
