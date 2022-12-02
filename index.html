@@ -56,6 +56,22 @@
         this.a = aValue; 
         this.b = bValue; 
         this.operation = operationValue; 
+
+        // this method will evaluate the calculation, 
+        // so we just have to call calculation.operate without 
+        // arguments and we are done. 
+
+        this.operate = function (){
+            if (this.operation == '+'){
+                return Number(this.a) + Number(this.b);
+            } else if (this.operation == '-'){
+                return Number(this.a) - Number(this.b);
+            } else if (this.operation == '*'){
+                return Number(this.a) * Number(this.b);
+            } else if (this.operation == '/'){
+                return Number(this.a)/Number(this.b)
+            }
+        }; 
     };
 
     let calculation = new Calculation(null, null, null); 
@@ -94,12 +110,27 @@
                     };
                 }; 
             
-                //if (list[i].textContent = '='){
-                    // evaluate the calculation
-                //};
+                if (list[i].textContent == '='){
+                    // console.log(calculation.operate());
+                    screen.textContent = String(calculation.operate());
+                    calculator.insertBefore(screen, grid);
+
+                    // keep the answer in memory by resetting it to a.
+                    // but clear b and operation for the next calculation.
+                    calculation.a = String(calculation.operate());
+                    calculation.b = null; 
+                    calculation.operation = null; 
+
+                    console.log(calculation); 
+                };
             });
         };
     };
+
+    // so we have an object a, b, operation. This object is storing the values input by 
+    // the user. We want to be able to manipulate these objects now. It should really work. 
+    // we have string-type values in the key value pair, so we should be able to create a method which 
+    // evaluates the function. Method inside the object.  
 
     addEventListenerList(keysArray);
     
