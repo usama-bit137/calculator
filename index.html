@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,19 @@
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
-<body>    
+
+<body>
     <div class="calculator">
         <div class="header">
-            <div class="logo"> <div class = "company"> TESSIO </div> <div class="second-line"><div class = "model">sf-961FS</div> 
-            <div class = "nickname">C L A S S W I Z</div></div></div>
-            <div class="solar-box"></div><div class="solar"></div>
+            <div class="logo">
+                <div class="company"> TESSIO </div>
+                <div class="second-line">
+                    <div class="model">sf-961FS</div>
+                    <div class="nickname">C L A S S W I Z</div>
+                </div>
+            </div>
+            <div class="solar-box"></div>
+            <div class="solar"></div>
         </div>
 
         <div class="screen"></div>
@@ -38,97 +46,142 @@
             <button class="grid-item"></button>
             <button class="grid-item"></button>
             <button class="grid-item corner-right-bottom =">=</button>
-          </div>
+        </div>
     </div>
-    
-<script>
-    const keys = document.querySelectorAll('.grid-item'); 
-    const grid = document.querySelector('.grid-container')
-    var calculator = document.querySelector('.calculator');
-    var screen = document.querySelector('.screen');
 
-    const keysArray = Array.from(keys);    
+    <script>
+        const keys = document.querySelectorAll('.grid-item');
+        const grid = document.querySelector('.grid-container'); 
+        var calculator = document.querySelector('.calculator');
+        var screen = document.querySelector('.screen');
 
+        const keysArray = Array.from(keys);
 
-    function Calculation(aValue,bValue,operationValue){
-        this.a = aValue; 
-        this.b = bValue; 
-        this.operation = operationValue; 
+        function Calculation(aValue, bValue, operationValue) {
+            this.a = aValue;
+            this.b = bValue;
+            this.operation = operationValue;
 
-        this.operate = function (){
-            if (this.operation == '+'){
-                return String(Number(this.a) + Number(this.b));
-            } else if (this.operation == '-'){
-                return String(Number(this.a) - Number(this.b));
-            } else if (this.operation == '*'){
-                return String(Number(this.a) * Number(this.b));
-            } else if (this.operation == '/'){
-                if (this.b == '0'){
-                    return 'Math ERROR';
-                } else {
-                    return String(Number(this.a)/Number(this.b)); 
+            this.operate = function () {
+                if (this.operation == '+') {
+                    return String(Number(this.a.slice(3)) + Number(this.b.slice(3)));
+                } else if (this.operation == '-') {
+                    return String(Number(this.a.slice(3)) - Number(this.b.slice(3)));
+                } else if (this.operation == '*') {
+                    return String(Number(this.a.slice(3)) * Number(this.b.slice(3)));
+                } else if (this.operation == '/') {
+              
+                    if (this.b.slice(3) == '0') {
+                        return 'Math ERROR';
+                    } else {
+                        return String(Number(this.a.slice(3)) / Number(this.b.slice(3)));
+                    };
                 };
             };
-        }; 
-
-    };
-
-    let calculation = new Calculation(null, null, null); 
-
-    function addEventListenerList(list){
-        for (let i = 0; i < list.length; i++){
-            list[i].addEventListener('click', ()=>{ 
-                // console.log(list[i].textContent);
-                
-                screen.textContent = list[i].textContent;
-                calculator.insertBefore(screen, grid);
-                
-                if (list[i].textContent == '*' || list[i].textContent == '/' || list[i].textContent =='+' || list[i].textContent=='-'){
-                    calculation.operation = list[i].textContent;
-                    console.log(calculation); 
-                
-                } else if (list[i].textContent == 'AC'){
-                    calculation = new Calculation(null, null, null);
-                    screen.textContent = ' '; 
-                    calculator.insertBefore(screen, grid); 
-                    console.log(calculation); 
-
-                } else {
-                    
-                    if (calculation.a == null){
-                        calculation.a = list[i].textContent;
-                        console.log(calculation);
-                    
-                    } else if (calculation.b == null){
-                        calculation.b = list[i].textContent;
-                        
-                        while (calculation.b == '='|| calculation.b == '*' || calculation.b == '/' || calculation.b =='+' || calculation.b=='-'){
-                            calculation.b = null;
-                            screen.textContent = 'syntax ERROR';
-                            calculator.insertBefore(screen, grid);
-                        }; 
-                        calculation.a = calculation.operate();  
-
-                        screen.textContent = calculation.a;
-                        calculator.insertBefore(screen, grid);
-                        calculation.b = null; 
-                        calculation.operation = null; 
-                    };
-                }; 
-            
-                if (list[i].textContent == '='){
-
-                    if (calculation.a != null && calculation.b != null &&calculation.operation != null){
-                        screen.textContent = calculation.a;
-                        calculator.insertBefore(screen, grid);
-                    }; 
-                };
-            });
         };
-    };
 
-    addEventListenerList(keysArray);
+        const removeFromArray = function () {
+            const slicedArgs = Array.prototype.slice.call(arguments, 1);
+            var array = arguments[0];
+            var withinCount = array.length;
+            for (let i = 0; i < slicedArgs.length; i++) {
 
-</script>
+                if (array.includes(slicedArgs[i])) {
+                    var index = array.indexOf(slicedArgs[i]);
+                    array.push(array.splice(index, 1)[0]);
+                    withinCount--;
+                };
+
+            } return array.slice(0, withinCount)
+        };
+
+        let calculation = new Calculation(null, null, null);
+
+        function addEventListenerList(list) {
+            for (let i = 0; i < list.length; i++) {
+                list[i].addEventListener('click', () => {
+
+                    screen.textContent = list[i].textContent;
+                    calculator.insertBefore(screen, grid);
+
+                    if (list[i].textContent == '*' || list[i].textContent == '/' || list[i].textContent == '+' || list[i].textContent == '-') {
+                        
+                        calculation.operation = list[i].textContent;
+                        
+                        if (calculation.a != null){
+                            calculation.a = calculation.a.slice(1);
+                            console.log(calculation.a); 
+
+                        } else if (calculation.b != null){
+                            calculation.b = calculation.b.slice(1); 
+                            console.log(calculation.b)
+                            calculation.a = calculation.operate();
+                            screen.textContent = calculation.a;
+                            calculator.insert(screen, grid);  
+                        }; 
+
+                        console.log(calculation.a);
+                        console.log(calculation);
+
+                    } else if (list[i].textContent == 'AC') {
+                        
+                        calculation = new Calculation(null, null, null);
+                        screen.textContent = '';
+                        calculator.insertBefore(screen, grid);
+                        console.log(calculation);
+
+                    } else {
+
+                        if (String(calculation.a).split('').includes('n')) {
+                            calculation.a = calculation.a + list[i].textContent;
+                            console.log(calculation.a);
+                            
+                            while (calculation.a == '=' || calculation.b == '*' || calculation.b == '/' || calculation.b == '+' || calculation.b == '-') {
+                                console.log(calculation);
+                                calculation.a = null;
+                                screen.textContent = 'syntax ERROR';
+                                calculator.insertBefore(screen, grid);
+                            };
+
+                            screen.textContent = calculation.a.slice(4);
+                            calculator.insertBefore(screen, grid);
+                            console.log(calculation);
+
+                        } else if (String(calculation.b).split('').includes('n')) {
+                            
+                            calculation.b = calculation.b + list[i].textContent;
+
+                            while (calculation.b == '=' ||calculation.b == '*'||calculation.b == '/'||calculation.b == '+'||calculation.b == '-' ) {
+                                calculation.b = null;
+                                screen.textContent = 'syntax ERROR';
+                                calculator.insertBefore(screen, grid);
+                            };
+
+                            console.log(calculation);
+                        
+                        };
+                    };
+
+                    if (list[i].textContent == '=') {
+
+                        calculation.b = removeFromArray(calculation.b.slice(1).split(''),'=').join('');  
+                        console.log(calculation.b); 
+                        calculation.a = 'null' + calculation.operate();
+                        console.log(calculation.a.slice(4)); 
+                        screen.textContent = calculation.a.slice(4);
+                        calculator.insertBefore(screen, grid);
+                        
+                        calculation.b = calculation.b.slice(1); 
+                        calculation.a = calculation.operate();
+        
+                    };
+                });
+            };
+        };
+
+        addEventListenerList(keysArray);
+
+    </script>
 </body>
+
 </html>
