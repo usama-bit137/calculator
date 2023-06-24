@@ -7,7 +7,6 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/index.js":
@@ -16,6 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scripts_addEventListenerList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/addEventListenerList */ \"./src/scripts/addEventListenerList.js\");\n\r\nconst buttonArray = [...document.querySelectorAll(\".grid-item\")]; // node list.\r\n\r\n(0,_scripts_addEventListenerList__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(buttonArray);\r\n\n\n//# sourceURL=webpack://calculator/./src/index.js?");
 
 /***/ }),
@@ -26,6 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scr
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _buttonClickEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./buttonClickEvent */ \"./src/scripts/buttonClickEvent.js\");\n\r\n\r\nconst addEventListenerList = (list) => {\r\n  list.forEach((item) => {\r\n    item.addEventListener(\"click\", () => {\r\n      (0,_buttonClickEvent__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(item.textContent);\r\n    });\r\n  });\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addEventListenerList);\r\n\n\n//# sourceURL=webpack://calculator/./src/scripts/addEventListenerList.js?");
 
 /***/ }),
@@ -36,7 +37,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst calculationStack = (string) => {\r\n  const calculation = string.split(\"\");\r\n  calculation.pop(); // this returns the popped element\r\n  return calculation.join(\"\");\r\n};\r\n\r\nconst screen = document.querySelector(\"#screen\");\r\nconst buttonClickEvent = (symbol) => {\r\n  const operations = [\"+\", \"-\", \"*\", \"/\"];\r\n  if (symbol === \"=\") {\r\n    // THIS IS GETTING CHUNKY\r\n    let calculationArray = screen.textContent\r\n      .split(\"\")\r\n      .map((el) => {\r\n        return operations.includes(el) ? ` ${el} ` : el;\r\n      })\r\n      .join(\"\")\r\n      .split(\" \")\r\n      .map((el) => {\r\n        return operations.includes(el) ? el : el * 1;\r\n      });\r\n\r\n    let answer;\r\n    if (calculationArray[1] === \"+\") {\r\n      answer = calculationArray[0] + calculationArray[2];\r\n    } else if (calculationArray[1] === \"-\") {\r\n      answer = calculationArray[0] - calculationArray[2];\r\n    } else if (calculationArray[1] === \"*\") {\r\n      answer = calculationArray[0] * calculationArray[2];\r\n    } else if (calculationArray[1] === \"/\") {\r\n      answer =\r\n        calculation[2] === 0\r\n          ? \"MATH ERROR\"\r\n          : calculationArray[0] / calculationArray[2];\r\n    }\r\n\r\n    screen.textContent = answer;\r\n    console.log(calculationArray);\r\n  } else if (symbol === \"DEL\") {\r\n    screen.textContent = calculationStack(screen.textContent);\r\n  } else if (symbol === \"AC\") {\r\n    screen.textContent = \"\";\r\n  } else {\r\n    screen.textContent += symbol;\r\n  }\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (buttonClickEvent);\r\n\n\n//# sourceURL=webpack://calculator/./src/scripts/buttonClickEvent.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst controller = __webpack_require__(/*! ./calculatorController */ \"./src/scripts/calculatorController.js\");\r\nconst operations = [\"+\", \"-\", \"*\", \"/\"];\r\n\r\nconst screen = document.querySelector(\"#screen\");\r\nconst buttonClickEvent = (symbol) => {\r\n  if (symbol === \"=\") {\r\n    const calculationArray = controller.prepare(screen.textContent);\r\n    screen.textContent = controller.evaluator(calculationArray);\r\n    console.log(calculationArray);\r\n  } else if (symbol === \"DEL\") {\r\n    screen.textContent = controller.stack(screen.textContent);\r\n  } else if (symbol === \"AC\") {\r\n    screen.textContent = \"\";\r\n  } else if (screen.textContent === \"MATH ERROR\") {\r\n    screen.textContent = symbol;\r\n  } else {\r\n    screen.textContent += symbol;\r\n  }\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (buttonClickEvent);\r\n\n\n//# sourceURL=webpack://calculator/./src/scripts/buttonClickEvent.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/calculatorController.js":
+/*!*********************************************!*\
+  !*** ./src/scripts/calculatorController.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("exports.stack = (string) => {\r\n  const calculation = string.split(\"\");\r\n  calculation.pop();\r\n  return calculation.join(\"\");\r\n};\r\n\r\nexports.prepare = (array) => {\r\n  const operations = \"+-*/\".split(\"\");\r\n\r\n  return array\r\n    .split(\"\")\r\n    .map((el) => {\r\n      return operations.includes(el) ? ` ${el} ` : el;\r\n    })\r\n    .join(\"\")\r\n    .split(\" \")\r\n    .map((el) => {\r\n      return operations.includes(el) ? el : el * 1;\r\n    });\r\n};\r\n\r\nexports.evaluator = (array) => {\r\n  if (array[1] === \"+\") {\r\n    return array[0] + array[2];\r\n  } else if (array[1] === \"-\") {\r\n    return array[0] - array[2];\r\n  } else if (array[1] === \"*\") {\r\n    return array[0] * array[2];\r\n  } else if (array[1] === \"/\") {\r\n    return array[2] === 0 ? \"MATH ERROR\" : array[0] / array[2];\r\n  }\r\n};\r\n\n\n//# sourceURL=webpack://calculator/./src/scripts/calculatorController.js?");
 
 /***/ })
 
