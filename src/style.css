@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-.calculator {
+#calculator {
   background-color: black;
   border: 2px solid white;
   border-width: 20px 10px 35px 10px;
@@ -61,7 +61,7 @@ body {
 }
 
 .solar,
-.screen {
+#screen {
   border-radius: 25px;
   border-left: 20px solid rgb(65, 62, 62);
   border-bottom: 20px solid rgb(65, 62, 62);
@@ -76,7 +76,7 @@ body {
   flex: 1 0 auto;
 }
 
-.screen {
+#screen {
   background-color: rgb(86, 117, 86);
   width: 640px;
   height: 250px;
