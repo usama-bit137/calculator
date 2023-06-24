@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("// entry-point\r\n\r\nconst buttonArray = [...document.querySelectorAll(\".grid-item\")]; // node list.\r\n\r\nconst addEventListenerList = (list) => {\r\n  list.forEach((item) => {\r\n    item.addEventListener(\"click\", () => {\r\n      console.log(item.textContent);\r\n    });\r\n  });\r\n};\r\n\r\naddEventListenerList(buttonArray);\r\n\n\n//# sourceURL=webpack://calculator/./src/index.js?");
+eval("// entry-point\r\n\r\nconst buttonArray = [...document.querySelectorAll(\".grid-item\")]; // node list.\r\n\r\nconst buttonClickEvent = (symbol) => {\r\n  console.log(symbol);\r\n};\r\n\r\nconst addEventListenerList = (list) => {\r\n  list.forEach((item) => {\r\n    item.addEventListener(\"click\", () => {\r\n      buttonClickEvent(item.textContent);\r\n    });\r\n  });\r\n};\r\n\r\naddEventListenerList(buttonArray);\r\n\n\n//# sourceURL=webpack://calculator/./src/index.js?");
 
 /***/ })
 
