@@ -1,0 +1,6 @@
+const screen = document.querySelector("#screen");
+const buttonClickEvent = (symbol) => {
+  screen.textContent = symbol;
+};
+
+export default buttonClickEvent;
