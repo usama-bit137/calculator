@@ -1,4 +1,5 @@
 # Calculator
+To see a live demo of this project [check this out](https://usama-bit137.github.io/calculator/).
 
 The purpose of this project is to create a functioning calculator which can calculate the basic operations such as (+-\*/). The basic functionality of this project is creation and use of the `addEventListenersList` function:
 
